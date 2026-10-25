@@ -1,4 +1,4 @@
-# Hidani Tech — AI Job Chat Assistant
+# AI Job Chat Assistant
 
 > A full-stack AI-powered job assistant: upload your resume, get personalized job recommendations from 1,800+ real listings, and apply — all through a conversational UI.
 
