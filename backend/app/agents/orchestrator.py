@@ -39,26 +39,26 @@ class Orchestrator:
         """Rule-guided deterministic intent classification with LLM-grade accuracy."""
         lower = message.lower().strip()
 
-        # 1. Apply intent
-        if re.search(r"\bapply\b", lower):
-            return "APPLY"
-
-        # 2. Application status / history intent
-        if re.search(r"(show|list|view|check|see|my|track).*(applied|applications|status|history)", lower):
+        # 1. Application status / history intent (checked before apply to catch 'what did I apply for')
+        if re.search(r"(show|list|view|check|see|my|track|what|where).*(applied|applications|status|history)", lower):
             return "APPLICATION_STATUS"
         if "what did i apply" in lower or "where did i apply" in lower or "my jobs" in lower:
             return "APPLICATION_STATUS"
 
+        # 2. Apply intent
+        if re.search(r"\b(apply|submit\s+application)\b", lower):
+            return "APPLY"
+
         # 3. Filtering jobs by criteria (remote, skills, location, experience)
-        if re.search(r"\b(remote|hybrid|onsite|location|in\s+[a-z]+)\b", lower) and any(w in lower for w in ["job", "role", "position", "work", "show", "find"]):
+        if re.search(r"\b(remote|hybrid|onsite|location|in\s+[a-z]+)\b", lower) and any(w in lower for w in ["job", "role", "position", "work", "show", "find", "openings"]):
             return "FILTER_JOBS"
-        if re.search(r"\b(react|python|node|java|typescript|frontend|backend|fullstack|devops|data|sde)\b", lower):
+        if re.search(r"\b(react|python|node|java|typescript|javascript|golang|go|rust|c\+\+|sql|angular|vue|frontend|backend|fullstack|devops|data|sde)\b", lower):
             return "FILTER_JOBS"
         if re.search(r"\b(junior|entry|fresher|intern|senior|lead)\b", lower):
             return "FILTER_JOBS"
 
         # 4. Job recommendation intent
-        if any(kw in lower for kw in ["recommend", "match", "suggest", "find jobs", "best jobs", "suitable", "roles for me"]):
+        if any(kw in lower for kw in ["recommend", "match", "suggest", "find jobs", "best jobs", "suitable", "roles for me", "roles", "jobs"]):
             return "RECOMMEND_JOBS"
 
         return "GENERAL_CHAT"
