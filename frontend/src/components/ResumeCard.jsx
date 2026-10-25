@@ -180,16 +180,44 @@ export default function ResumeCard({ data, onSkillClick }) {
 
           {/* Education */}
           {education.length > 0 && (
-            <div style={{ padding: '14px 18px' }}>
+            <div style={{ padding: '14px 18px', borderBottom: projects.length ? '1px solid var(--border)' : 'none' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-3)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
                 Education
               </div>
               {education.map((edu, i) => (
-                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-2)' }}>
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-2)', marginBottom: i < education.length - 1 ? '6px' : 0 }}>
                   <span>{edu.degree || edu.institution}</span>
                   <span style={{ color: 'var(--text-3)', fontFamily: 'var(--mono)' }}>{edu.year || edu.duration}</span>
                 </div>
               ))}
+            </div>
+          )}
+
+          {/* Projects */}
+          {projects.length > 0 && (
+            <div style={{ padding: '14px 18px' }}>
+              <div style={{ fontSize: '11px', color: 'var(--text-3)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
+                Projects
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {projects.map((proj, i) => (
+                  <div key={i}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'wrap' }}>
+                      <span style={{ fontWeight: 500, fontSize: '13px', color: 'var(--text-1)' }}>{proj.name}</span>
+                      {proj.tech_stack?.length > 0 && (
+                        <span style={{ fontSize: '11px', color: 'var(--accent)', fontFamily: 'var(--mono)' }}>
+                          [{Array.isArray(proj.tech_stack) ? proj.tech_stack.join(', ') : proj.tech_stack}]
+                        </span>
+                      )}
+                    </div>
+                    {proj.description && (
+                      <p style={{ fontSize: '12px', color: 'var(--text-3)', marginTop: '2px', lineHeight: 1.5 }}>
+                        {proj.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
