@@ -49,11 +49,13 @@ app = FastAPI(
 
 # ─── CORS Middleware ──────────────────────────────────────────────────────────
 # CORS is configured specifically for designated frontend origins as required.
+_cors_list = settings.cors_origins if isinstance(settings.cors_origins, list) else [settings.cors_origins]
+_is_wildcard = "*" in _cors_list
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_origins=_cors_list,
+    allow_credentials=not _is_wildcard,
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
