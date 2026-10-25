@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --black:       #0c0c0d;
+  --surface-0:   #111114;
+  --surface-1:   #18181c;
+  --surface-2:   #202027;
+  --surface-3:   #28282f;
+  --border:      rgba(255,255,255,0.07);
+  --border-mid:  rgba(255,255,255,0.12);
+
+  --text-1: #f2f2f3;
+  --text-2: #a0a0ad;
+  --text-3: #5a5a6a;
+
+  --accent:      #e8a045;
+  --accent-dim:  rgba(232, 160, 69, 0.14);
+  --accent-mid:  rgba(232, 160, 69, 0.28);
+
+  --green:       #3ecf8e;
+  --green-dim:   rgba(62, 207, 142, 0.12);
+
+  --red:         #f87171;
+
+  --font: 'Inter', system-ui, sans-serif;
+  --mono: 'DM Mono', 'Fira Code', monospace;
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+
+  --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--black);
+  color: var(--text-1);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 99px; }
+
+.mono { font-family: var(--mono); }
+
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.8;
+}
+
+.tag-accent {
+  background: var(--accent-dim);
+  border-color: rgba(232, 160, 69, 0.3);
+  color: var(--accent);
+}
+
+.tag-green {
+  background: var(--green-dim);
+  border-color: rgba(62, 207, 142, 0.3);
+  color: var(--green);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.fade-up {
+  animation: fadeUp 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
